@@ -20,7 +20,7 @@ setup(
   maintainer='Aaron Zifre',
   maintainer_email='aaron.zifre@gmail.com',
   #url='',
-  packages=['metacode'],
+  packages=['metacode', 'metacode.types', 'metacode.value'],
   ext_modules=[
     Extension('llvm',
               ['llvm/llvm.cpp'],

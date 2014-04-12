@@ -6,11 +6,17 @@
 # See: LICENSE or http://www.gnu.org/licenses/
 #
 
-"""
-Main Metacode package for some most important things...
-"""
+'''
+Identifier classes
+'''
 
-__version__ = '0.0'
+class Name:
+  def __init__(self, name):
+    self._name = name
 
-from assembly import *
+  def __str__(self):
+    return '"%s"' % self._name
 
+class List:
+  def __init__(self, ids):
+    pass

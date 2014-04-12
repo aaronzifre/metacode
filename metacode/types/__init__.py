@@ -6,11 +6,9 @@
 # See: LICENSE or http://www.gnu.org/licenses/
 #
 
-"""
-Main Metacode package for some most important things...
-"""
+'''
+Type system package
+'''
 
-__version__ = '0.0'
-
-from assembly import *
+from integer import *
 
