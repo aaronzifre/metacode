@@ -21,6 +21,7 @@ class Assembly:
     self._name = name
     self._mems = {}
     self._inttemplate = type.IntegerTemplate(identifier.Name('UInt'), self)
+    self._funtemplate = type.FunctionTemplate(identifier.Name('Func'), self)
     # TODO TODO TODO
     # create int type
 

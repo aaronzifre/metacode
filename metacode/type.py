@@ -26,7 +26,18 @@ class IntegerTemplate(node.Node):
     self._dbt._id = value.IntegerValue(self._dbt, self._dbw)
     self._mems[self._dbt._id] = self._dbt
 
+  def __str__(self):
+    return "<template-integer: %s>.%s" % (self._id, self._parent)
 
+  def default(self):
+    return self._dbt
+
+  def identifier(self):
+    return self._id
+    
+  def parent(self):
+    return self._parent
+    
   def print_tree(self):
     R = "IntegerTemplate: %s" % self._id
     S = ''
@@ -37,18 +48,6 @@ class IntegerTemplate(node.Node):
       T += ' ' + line + '\n'
     T = T.rstrip(' ')
     return R + '\n' + T
-
-  def __str__(self):
-    return "<template-integer: %s>" % self._id
-
-  def default(self):
-    return self._dbt
-
-  def identifier(self):
-    return self._id
-    
-  def parent(self):
-    return self._parent
     
   def specialization(self, id):
     if id in self._mems: return self._mems[id]
@@ -85,13 +84,57 @@ class IntegerType(node.Node):
     return str(self)
 
   def __str__(self):
-    return "<type-integer: %s>" % self._width
+    return "<type-integer: %s>.%s" % (self._width, self._parent)
 
 
 class FunctionTemplate(node.Node):
   def __init__(self, id, parent):
     self._id = id
     self._parent = parent
+    self._mems = {}
+    parent.add_member(self._id, self)
+    
+  def __str__(self):
+    return "<template-function: %s>.%s" % (self._id, self._parent)
+    
+  def identifier(self):
+    return self._id
+  
+  def parent(self):
+    return self._parent
+  
+  def print_tree(self):
+    R = "FunctionTemplate: %s" % self._id
+    S = ''
+    for mem in self._mems.values():
+      S += mem.print_tree() + '\n'
+    T = ''
+    for line in S.splitlines():
+      T += ' ' + line + '\n'
+    T = T.rstrip(' ')
+    return R + '\n' + T
+      
+  
+  def specialization(self, id):
+    if id in self._mems: return self._mems[id]
+    
+    if not isinstance(id, identifier.List): raise TypeError("id should be metacode.identifier.List")
+    if not len(id) >= 1: raise ValueError("id should contain at least one identifier")
+    
+    ft = FunctionType(id, self, id[0], id[1:])
+    self._mems[id] = ft
+    return ft
 
 class FunctionType(node.Node):
-  pass
+  def __init__(self, id, parent, ret, args):
+    self._id = id
+    self._parent = parent
+    self._ret = ret
+    self._args = args
+    
+  def __str__(self):
+    return "<type-function: %s>.%s" % (self._id, self._parent)
+
+  def print_tree(self):
+    return str(self)
+  

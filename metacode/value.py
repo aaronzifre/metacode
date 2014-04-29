@@ -16,6 +16,8 @@ class IntegerValue:
     self._type = type
     self._value = value
 
+  def __repr__(self): return str(self)
+    
   def __str__(self):
     return "<value-integer: %s of %s>" % (self._value, self._type)
 
