@@ -7,8 +7,7 @@
 #
 
 '''
-Value system package
+Type system package
 '''
 
-from integer import *
-
+import type
