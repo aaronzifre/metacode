@@ -44,7 +44,10 @@ class Assembly:
     
   def add_member(self, identifier, node):
     self._mems[identifier] = node
-    
+
+  def assembly(self):
+    return self
+        
   def mangle(self):
     return 'A' + '.'  # jak Assembly
 

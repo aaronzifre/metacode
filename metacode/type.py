@@ -135,6 +135,12 @@ class FunctionType(node.Node):
   def __str__(self):
     return "<type-function: %s>.%s" % (self._id, self._parent)
 
+  def identifier(self):
+    return self._id
+    
+  def parent(self):
+    return self._parent
+    
   def print_tree(self):
     return str(self)
   

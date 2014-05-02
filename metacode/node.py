@@ -14,6 +14,9 @@ class Node:
   def __hash__(self):
     return hash(self.mangle())
   
+  def assembly(self):
+    return self.parent().assembly()
+  
   def mangle(self):
     S = 'N'   # N jak Node
     S += self.parent().mangle()
